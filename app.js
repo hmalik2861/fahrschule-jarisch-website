@@ -40,6 +40,12 @@ const translations = {
   'Vom ersten Auto bis zum Motorrad: Hier findest du den passenden Einstieg.': 'From your first car to a motorcycle: find the right starting point for you.',
   'Beliebtester Einstieg': 'Most popular entry point',
   'Klasse B': 'Class B',
+  'Klasse BE': 'Class BE',
+  'Klasse B96': 'Class B96',
+  'Klasse AM': 'Class AM',
+  'Klasse A1': 'Class A1',
+  'Klasse A2': 'Class A2',
+  'Klasse A': 'Class A',
   'Der klassische Autoführerschein – mit Automatikoption und begleitetem Fahren ab 17.': 'The classic car licence — with an automatic option and accompanied driving from age 17.',
   'Ab 18 Jahren, BF 17 ab 17': 'From age 18, BF 17 from age 17',
   'AM, L und dreirädrige Kfz im Inland eingeschlossen': 'AM, L and three-wheeled vehicles included domestically',
@@ -67,6 +73,7 @@ const translations = {
   'BE für Anhänger': 'BE for trailers',
   'B96 als Erweiterung': 'B96 as an extension',
   'AM & L im Mehrfachklassen-Preis': 'AM & L in the multiple-class price',
+  'Mehrfachklassen A1 + L': 'Multiple classes A1 + L',
   'Erweiterungen ansehen': 'View extensions',
   'Motorradführerschein in Neu-Ulm': 'Motorcycle licence in Neu-Ulm',
   'Bei einem Vorbesitz von A1 oder A2 ist der Aufstieg über eine Prüfung möglich.': 'If you already hold A1 or A2, an upgrade through an exam is possible.',
@@ -92,6 +99,7 @@ const translations = {
   'Erweiterung': 'Extension',
   'Leichtfahrzeug': 'Light vehicle',
   'Grundbetrag': 'Basic amount',
+  '* Grundbetrag f\u00fcr allgemeine Aufwendungen einschlie\u00dflich theoretischem Unterricht und Lernapp. \u00c4nderungen vorbehalten.': '* Basic amount for general expenses including theory lessons and the learning app. Subject to change.',
   'Theorieprüfung': 'Theory test',
   'Praktische Prüfung': 'Practical exam',
   'Fahrstunde': 'Driving lesson',
@@ -104,6 +112,10 @@ const translations = {
   'Grundbetrag für allgemeine Aufwendungen einschließlich theoretischem Unterricht und Lernapp. Änderungen vorbehalten.': 'Basic amount for general expenses including theory lessons and the learning app. Subject to change.',
   'Für Fahranfänger': 'For novice drivers',
   'Aufbauseminar': 'Advanced training seminar',
+  'Aufbauseminar f\u00fcr Fahranf\u00e4nger': 'Advanced training seminar for novice drivers',
+  'f\u00fcr Fahranf\u00e4nger': 'for novice drivers',
+  'Klar bleiben.': 'Stay clear.',
+  'Weiterfahren.': 'Keep moving.',
   'Wer innerhalb der zweijährigen Probezeit auffällig wird, muss an einem Aufbauseminar für Fahranfänger teilnehmen. Das Seminar unterstützt dich dabei, dein Fahrverhalten zu ändern und dich zukünftig vorschriftsmäßig im Straßenverkehr zu verhalten.': 'Anyone who receives a traffic violation during the two-year probationary period must take an advanced training seminar for novice drivers. The seminar supports you in changing your driving behaviour and following road rules in the future.',
   'ASF anfragen': 'Ask about ASF',
   'Aufbauseminar\nfür Fahranfänger': 'Advanced training seminar\nfor novice drivers',
@@ -155,6 +167,12 @@ const translations = {
   'Menü öffnen': 'Open menu',
   'Sprache wählen': 'Choose language',
   'Sprache': 'Language',
+  'Hauptnavigation': 'Main navigation',
+  'Zum n\u00e4chsten Abschnitt scrollen': 'Scroll to next section',
+  'Vorteile': 'Benefits',
+  'Preiskategorien': 'Price categories',
+  'Armaturenbrett eines Fahrschulautos': 'Dashboard of a driving school car',
+  'Fahrschule Jarisch Startseite': 'Fahrschule Jarisch homepage',
   'Führerscheine': 'Driving licences',
   'Preise': 'Prices',
   'Kontakt': 'Contact',
@@ -193,6 +211,20 @@ const translateAttributes = (lang) => {
     : { 'First and last name': 'Vor- und Nachname', 'you@example.com': 'du@beispiel.de', 'How can we help?': 'Wobei können wir helfen?' };
   document.querySelectorAll('[placeholder]').forEach((element) => {
     if (attributes[element.placeholder]) element.placeholder = attributes[element.placeholder];
+  });
+  const ariaTranslations = {
+    'Hauptnavigation': 'Main navigation',
+    'Zum n\u00e4chsten Abschnitt scrollen': 'Scroll to next section',
+    'Vorteile': 'Benefits',
+    'Preiskategorien': 'Price categories',
+    'Armaturenbrett eines Fahrschulautos': 'Dashboard of a driving school car',
+    'Fahrschule Jarisch Startseite': 'Fahrschule Jarisch homepage'
+  };
+  const reverseAria = Object.fromEntries(Object.entries(ariaTranslations).map(([german, englishValue]) => [englishValue, german]));
+  document.querySelectorAll('[aria-label]').forEach((element) => {
+    const current = element.getAttribute('aria-label');
+    const nextValue = (english ? ariaTranslations : reverseAria)[current];
+    if (nextValue) element.setAttribute('aria-label', nextValue);
   });
 };
 
